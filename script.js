@@ -1,15 +1,15 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // Smooth Scrolling for Navigation Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetSection = document.querySelector(this.getAttribute('href'));
-    
+
             targetSection.scrollIntoView({
                 behavior: 'smooth'
             });
-    
+
             // Function to check if scrolling has stopped
             function checkIfScrollStopped() {
                 const position = window.pageYOffset;
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (position === window.pageYOffset) {
                         // Add zoom effect when scrolling stops
                         targetSection.classList.add('zoom-effect');
-    
+
                         // Remove the effect after the animation completes
                         setTimeout(() => {
                             targetSection.classList.remove('zoom-effect');
@@ -27,13 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }, 100);
             }
-    
+
             checkIfScrollStopped();
         });
-    });    
+    });
 
     // Mobile Menu Toggle
-    // Update these selectors according to your HTML structure
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('nav ul');
 
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Contact Form Validation
-    // Update the selector according to your form
     const form = document.querySelector('#contact-form');
     if (form) {
         form.addEventListener('submit', function (e) {
@@ -54,29 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Dark Mode Toggle Functionality
     const darkModeToggle = document.getElementById('darkModeToggle');
 
-    darkModeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-    });
-});
-
-// Check for saved theme in localStorage
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    document.getElementById('darkModeToggle').textContent = '☀️';
-}
-
-document.getElementById('darkModeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-
-    // Update icon and store preference
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-        document.getElementById('darkModeToggle').textContent = '☀️';
+    // Check for saved theme in localStorage and apply
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
     } else {
-        localStorage.setItem('theme', 'light');
-        document.getElementById('darkModeToggle').textContent = '🌙';
+        darkModeToggle.textContent = '🌙';
     }
+
+    // Toggle dark mode and save preference
+    darkModeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            darkModeToggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            darkModeToggle.textContent = '🌙';
+        }
+    });
+
 });
