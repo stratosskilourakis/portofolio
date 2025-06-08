@@ -60,3 +60,23 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.toggle('dark-mode');
     });
 });
+
+// Check for saved theme in localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('darkModeToggle').textContent = '☀️';
+}
+
+document.getElementById('darkModeToggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    // Update icon and store preference
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        document.getElementById('darkModeToggle').textContent = '☀️';
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.getElementById('darkModeToggle').textContent = '🌙';
+    }
+});
